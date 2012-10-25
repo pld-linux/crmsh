@@ -1,0 +1,9 @@
+diff -dur crmsh-b6bb311c7bd3.orig/test/testcases/ra.filter crmsh-b6bb311c7bd3/test/testcases/ra.filter
+--- crmsh-b6bb311c7bd3.orig/test/testcases/ra.filter	2012-10-15 20:13:49.000000000 +0200
++++ crmsh-b6bb311c7bd3/test/testcases/ra.filter	2012-10-25 14:47:52.000000000 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/bin/awk -f
++#!/bin/awk -f
+ # reduce the providers list to heartbeat and pacemaker
+ # (prevents other providers creeping in)
+ function reduce(a) {
