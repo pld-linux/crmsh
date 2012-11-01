@@ -16,6 +16,7 @@ URL:		https://savannah.nongnu.org/projects/crmsh/
 BuildRequires:	asciidoc
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	docbook-dtd45-xml
 BuildRequires:	pacemaker-devel >= 1.1.8
 BuildRequires:	python
 BuildRequires:	python-modules
