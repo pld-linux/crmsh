@@ -1,0 +1,12 @@
+diff -dur crmsh-b6bb311c7bd3.orig/modules/utils.py crmsh-b6bb311c7bd3/modules/utils.py
+--- crmsh-b6bb311c7bd3.orig/modules/utils.py	2012-10-15 20:13:49.000000000 +0200
++++ crmsh-b6bb311c7bd3/modules/utils.py	2012-11-01 17:22:51.115436156 +0100
+@@ -620,6 +620,8 @@
+         if len(s) > max_len:
+             max_len = len(s)
+     cols = w/(max_len + min_gap)  # approx.
++    if not cols:
++        cols = 1
+     col_len = w/cols
+     for i in range(len(l)/cols + 1):
+         s = ''
