@@ -1,18 +1,17 @@
 #
 # Note: This is not noarch, as it has %{_libdir} etc. hardcoded in *.py files
 #
-%define	changeset_id b6bb311c7bd3
+%define	changeset_id 51379136d692
 #
 Summary:	Pacemaker command line interface for management and configuration
 Name:		crmsh
-Version:	1.2.1
+Version:	1.2.4
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://hg.savannah.gnu.org/hgweb/crmsh/archive/%{changeset_id}.tar.bz2
-# Source0-md5:	f4d0a4d30498c3b5ee73ff8b70eb3005
+# Source0-md5:	66f754955c1e45ec2fd4268ab31ae7cf
 Patch0:		%{name}-awk.patch
-Patch1:		%{name}-zero_division.patch
 URL:		https://savannah.nongnu.org/projects/crmsh/
 BuildRequires:	asciidoc
 BuildRequires:	autoconf
@@ -33,7 +32,6 @@ Contains the 'crm' utility which was part of Pacemaker < 1.1.8
 %prep
 %setup -qn %{name}-%{changeset_id}
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__aclocal}
