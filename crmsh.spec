@@ -1,18 +1,16 @@
 #
 # Note: This is not noarch, as it has %{_libdir} etc. hardcoded in *.py files
 #
-%define	changeset_id ef3f08547688
-#
 Summary:	Pacemaker command line interface for management and configuration
 Name:		crmsh
-Version:	1.2.5
+Version:	2.1.0
 Release:	1
 License:	GPL v2
 Group:		Applications/System
-Source0:	http://hg.savannah.gnu.org/hgweb/crmsh/archive/%{changeset_id}.tar.bz2
-# Source0-md5:	e2276903e4174340d45de740de9c212c
+Source0:	https://github.com/crmsh/crmsh/archive/%{version}/crmsh-%{version}.tar.gz
+# Source0-md5:	2b7c39a561f59d146882f4c020fa9060
 Patch0:		%{name}-awk.patch
-URL:		https://savannah.nongnu.org/projects/crmsh/
+URL:		http://crmsh.github.io/
 BuildRequires:	asciidoc
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -21,7 +19,7 @@ BuildRequires:	docbook-dtd45-xml
 BuildRequires:	pacemaker-devel >= 1.1.8
 BuildRequires:	python
 BuildRequires:	python-modules
-Requires:	pacemaker >= 1.1.8
+Requires:	pacemaker >= 1.1.11
 Provides:	pacemaker-shell
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -31,7 +29,7 @@ Pacemaker command line interface for management and configuration.
 Contains the 'crm' utility which was part of Pacemaker < 1.1.8
 
 %prep
-%setup -qn %{name}-%{changeset_id}
+%setup -q
 %patch0 -p1
 
 %build
@@ -57,7 +55,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README doc/*.html
+%dir /etc/crm
+%config(noreplace) %verify(not md5 mtime size) /etc/crm/crm.conf
 %attr(755,root,root) %{_sbindir}/crm
 %{py_sitedir}/%{name}
 %{_datadir}/%{name}
 %{_mandir}/man8/crm.8*
+%{_mandir}/man8/crmsh_hb_report.8.gz
