@@ -3,12 +3,12 @@
 #
 Summary:	Pacemaker command line interface for management and configuration
 Name:		crmsh
-Version:	2.1.0
+Version:	2.1.1
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	https://github.com/crmsh/crmsh/archive/%{version}/crmsh-%{version}.tar.gz
-# Source0-md5:	2b7c39a561f59d146882f4c020fa9060
+# Source0-md5:	9b1e78698e5301b40081c0261abe2c8e
 Patch0:		%{name}-awk.patch
 URL:		http://crmsh.github.io/
 BuildRequires:	asciidoc
@@ -20,6 +20,7 @@ BuildRequires:	pacemaker-devel >= 1.1.8
 BuildRequires:	python
 BuildRequires:	python-modules
 Requires:	pacemaker >= 1.1.11
+Requires:	python-lxml
 Provides:	pacemaker-shell
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
