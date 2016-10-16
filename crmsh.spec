@@ -4,28 +4,25 @@
 Summary:	Pacemaker command line interface for management and configuration
 Summary(pl.UTF-8):	Interfejs linii poleceń do zarządzania i konfiguracji Pacemakera
 Name:		crmsh
-Version:	2.1.2
+Version:	2.3.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
+#Source0Download: https://github.com/ClusterLabs/crmsh/releases
 Source0:	https://github.com/crmsh/crmsh/archive/%{version}/crmsh-%{version}.tar.gz
-# Source0-md5:	5e6543b3a3d77bb3368de953c0e0f292
+# Source0-md5:	10b0e13018d671e414665f5196ba8415
 Patch0:		%{name}-awk.patch
 URL:		http://crmsh.github.io/
 BuildRequires:	asciidoc
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
-BuildRequires:	cluster-glue-libs-devel
 BuildRequires:	docbook-dtd45-xml
-BuildRequires:	pacemaker-devel >= 1.1.8
-BuildRequires:	pkgconfig
 BuildRequires:	python >= 1:2.6
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	rpm-pythonprov
 BuildRequires:	sed >= 4.0
+Requires:	cluster-glue
 Requires:	pacemaker >= 1.1.11
-Requires:	python-PyYAML
-Requires:	python-lxml
 Provides:	pacemaker-shell
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -64,23 +61,28 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
-
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
+# can we py_postclean?
 
+# packaged as %doc
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
+# tests
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/%{name}/tests
+# reduntant
+%{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/crmsh/install_files.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README TODO doc/*.html
+%doc AUTHORS ChangeLog README.md TODO doc/*.html
 %dir /etc/crm
 %config(noreplace) %verify(not md5 mtime size) /etc/crm/crm.conf
-%attr(755,root,root) %{_sbindir}/crm
-%{py_sitedir}/%{name}
+%attr(755,root,root) %{_bindir}/crm
+%{py_sitedir}/crmsh
+%{py_sitedir}/crmsh-%{version}-py*.egg-info
 %{_datadir}/%{name}
 %{_mandir}/man8/crm.8*
 %{_mandir}/man8/crmsh_hb_report.8*
