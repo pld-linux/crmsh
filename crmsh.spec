@@ -4,13 +4,13 @@
 Summary:	Pacemaker command line interface for management and configuration
 Summary(pl.UTF-8):	Interfejs linii poleceń do zarządzania i konfiguracji Pacemakera
 Name:		crmsh
-Version:	2.3.1
+Version:	3.0.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 #Source0Download: https://github.com/ClusterLabs/crmsh/releases
-Source0:	https://github.com/crmsh/crmsh/archive/%{version}/crmsh-%{version}.tar.gz
-# Source0-md5:	10b0e13018d671e414665f5196ba8415
+Source0:	https://github.com/ClusterLabs/crmsh/archive/%{version}/crmsh-%{version}.tar.gz
+# Source0-md5:	ff41cc2f4abf4498ea55fe033eb854f3
 Patch0:		%{name}-awk.patch
 URL:		http://crmsh.github.io/
 BuildRequires:	asciidoc
@@ -43,10 +43,7 @@ Zawiera polecenie "crm", które było częścią Pacemakera < 1.1.8.
 %{__sed} -i -e '1s,/usr/bin/env python,%{__python},' \
 	utils/crm_clean.py \
 	scripts/check-uptime/*.py \
-	scripts/add/*.py \
-	scripts/health/*.py \
-	scripts/init/*.py \
-	scripts/remove/*.py
+	scripts/health/*.py
 
 %build
 %{__aclocal}
