@@ -1,11 +1,12 @@
 #
 # Note: This is not noarch, as it has %{_libdir} etc. hardcoded in *.py files
+%define		_enable_debug_packages	0
 #
 Summary:	Pacemaker command line interface for management and configuration
 Summary(pl.UTF-8):	Interfejs linii poleceń do zarządzania i konfiguracji Pacemakera
 Name:		crmsh
 Version:	3.0.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/System
 #Source0Download: https://github.com/ClusterLabs/crmsh/releases
@@ -40,16 +41,20 @@ Zawiera polecenie "crm", które było częścią Pacemakera < 1.1.8.
 %setup -q
 %patch0 -p1
 
-%{__sed} -i -e '1s,/usr/bin/env python,%{__python},' \
-	utils/crm_clean.py \
-	scripts/check-uptime/*.py \
-	scripts/health/*.py
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python}\1,' -e '1s,#!\s*/usr/bin/python(\s|$),#!%{__python}\1,' \
+      utils/crm_clean.py \
+      utils/crm_pkg.py \
+      utils/crm_rpmcheck.py \
+      scripts/check-uptime/*.py \
+      scripts/health/*.py \
+      bin/crm
 
 %build
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-%configure
+%configure \
+	PYTHON=%{__python}
 %{__make}
 
 %install
