@@ -39,7 +39,7 @@ Zawiera polecenie "crm", które było częścią Pacemakera < 1.1.8.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P0 -p1
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python}\1,' -e '1s,#!\s*/usr/bin/python(\s|$),#!%{__python}\1,' \
       utils/crm_clean.py \
