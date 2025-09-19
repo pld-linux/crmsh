@@ -1,0 +1,11 @@
+--- crmsh-5.0.0/Makefile.am~	2025-08-15 04:59:27.000000000 +0200
++++ crmsh-5.0.0/Makefile.am	2025-09-20 01:14:11.183327266 +0200
+@@ -66,7 +66,7 @@
+ 
+ # Build Python wheel
+ $(builddir)/dist/crmsh-$(VERSION)-py3-none-any.whl $(builddir)/build:
+-	cd $(srcdir); python3 -m build --outdir $(shell readlink -f $(builddir))/dist --wheel --sdist --verbose
++	cd $(srcdir); python3 -m build --outdir $(shell readlink -f $(builddir))/dist --wheel --sdist --verbose --no-isolation
+ 
+ all-local: $(builddir)/dist/crmsh-$(VERSION)-py3-none-any.whl $(builddir)/build
+ 

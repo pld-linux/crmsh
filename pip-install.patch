@@ -1,0 +1,11 @@
+--- crmsh-5.0.0/Makefile.am~	2025-09-20 01:16:58.000000000 +0200
++++ crmsh-5.0.0/Makefile.am	2025-09-20 01:21:12.626660602 +0200
+@@ -75,7 +75,7 @@
+ # Python module installation
+ install-exec-local:
+ 	$(INSTALL) -d -m 770 $(DESTDIR)${localstatedir}/log/crmsh
+-	python3 -m pip install --prefix=$(prefix) $(shell readlink -f $(builddir))/dist/*.whl
++	python3 -m pip install --prefix=$(DESTDIR)$(prefix) $(shell readlink -f $(builddir))/dist/*.whl
+ 	$(INSTALL) -d -m 770 $(DESTDIR)$(CRM_CACHE_DIR)
+ 
+ uninstall-local:
